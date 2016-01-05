@@ -39,12 +39,12 @@ namespace vicsek
         private:
 
             int seed = 100;
-            uInt maxstep = 10000;
-            uInt nlist_renew_step = 100;
-            uInt observe_step = 10;
+            uInt maxstep = 100;
+            uInt nlist_renew_step = 1;
+            uInt observe_step = 1;
             uInt particle_number = 1000;
-            double box_width = 1e1;
-            double box_height = 1e1;
+            double box_width = 1e2;
+            double box_height = 1e2;
             double particle_velocity = 1e0;
             double cutoff_distance = 5e0;
             double noise_intensity = M_PI / 4e0;
@@ -90,12 +90,11 @@ namespace vicsek
 
     void System::run()
     {
-        std::cout << "system warming up..." << std::endl;
         particle_observer->write(particle_manager);
         for(uInt timestep = 0; timestep < maxstep; ++timestep)
         {
-            std::cout << "timestep" << std::endl;
-            time_stepper->move_particle(particle_manager,
+            time_stepper->move_particle(region,
+                    particle_manager,
                     neighbor_list_handler,
                     random_number_generator
                 );
@@ -107,9 +106,8 @@ namespace vicsek
                     );
             if(timestep % observe_step == 0)
                 particle_observer->write(particle_manager);
-            if(timestep == 0)
-                std::cout << "simulation started" << std::endl;
-            if(timestep % (maxstep / 100) == 0)
+
+            if(timestep % (maxstep / 10) == 0)
                 std::cout << "progress: " << timestep / (maxstep / 100) << "%."
                           << std::endl;
         }

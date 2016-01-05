@@ -13,16 +13,19 @@ namespace vicsek
             TimeStepper(){}
             ~TimeStepper(){}
 
-            void move_particle(const ParticleManagerSptr& particle_manager,
+            void move_particle(const RegionSptr& region,
+                    const ParticleManagerSptr& particle_manager,
                     const NeighborListHandlerSptr& neighbor_list_handler,
                     const RandomNumberGeneratorSptr& rng);
+
             void renew_neighborlist(const RegionSptr& region,
                     const ParticleManagerSptr& particle_manager,
                     const NeighborListHandlerSptr& neighbor_list_handler);
     };
     using TimeStepperSptr = std::shared_ptr<TimeStepper>;
 
-    void TimeStepper::move_particle(const ParticleManagerSptr& particle_manager,
+    void TimeStepper::move_particle(const RegionSptr& region,
+            const ParticleManagerSptr& particle_manager,
             const NeighborListHandlerSptr& neighbor_list_handler,
             const RandomNumberGeneratorSptr& rng)
     {
@@ -34,14 +37,16 @@ namespace vicsek
 
             int neighbor_num = 0;
             double mean_theta(0e0);
-            for(auto niter = nlist->begin(); niter != nlist->end(); ++iter)
+            for(auto niter = nlist->begin(); niter != nlist->end(); ++niter)
             {
                 mean_theta += particle_manager->find_ID(*niter)->get_theta();
                 ++neighbor_num;
             }
             mean_theta /= static_cast<double>(neighbor_num);
+
+
             double rand = rng->get_uniform_dist();
-            (*iter)->renew_position(mean_theta, rand);
+            (*iter)->renew_position(mean_theta, rand, region);
         }
         return;
     }

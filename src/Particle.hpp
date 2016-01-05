@@ -1,6 +1,7 @@
 #ifndef VICSEK_PARTICLE
 #define VICSEK_PARTICLE
 #include "Defs.hpp"
+#include "Region.hpp"
 
 namespace vicsek
 {
@@ -20,7 +21,9 @@ namespace vicsek
             }
             ~Particle(){}
 
-            void renew_position(const double mean_angle, const double rnd);
+            void renew_position(const double mean_angle,
+                    const double rnd,
+                    const RegionSptr& region);
             std::string dump();
 
             uInt get_ID() const {return ID;}
@@ -43,9 +46,12 @@ namespace vicsek
 
     uInt Particle::IDgenerator = 0;
 
-    void Particle::renew_position(const double mean_angle, const double rnd)
+    void Particle::renew_position(const double mean_angle,
+                                  const double rnd,
+                                  const RegionSptr& region)
     {
         theta = mean_angle + eta * rnd;
+
         while(theta < -M_PI)
             theta += 2e0 * M_PI;
         while(theta >= M_PI)
@@ -53,6 +59,9 @@ namespace vicsek
 
         position +=
             v_0 * Vector(std::array<double, 2>({{cos(theta), sin(theta)}}));
+
+        if(region->out_of_range(position))
+            position = region->put_in_range(position);
         return;
     }
 
