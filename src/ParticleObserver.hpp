@@ -29,7 +29,6 @@ namespace vicsek
 
     void ParticleObserver::write(const ParticleManagerSptr& particle_manager)
     {
-        uInt index = 0;
         for(auto iter = particle_manager->begin();
                 iter != particle_manager->end(); ++iter)
         {
@@ -39,10 +38,9 @@ namespace vicsek
             const Vector vel =
                 Vector(std::array<double,2>({{v0 * cos(theta), v0 * sin(theta)}}));
 
-            output << index  << " "
+            output << (*iter)->get_ID()       << " "
                    << pos[0] << " " << pos[1] << " "
                    << vel[0] << " " << vel[1] << std::endl;
-            ++index;
         }
         output << std::endl;
         output << std::endl;
