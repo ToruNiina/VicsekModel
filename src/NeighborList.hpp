@@ -23,12 +23,15 @@ namespace vicsek
             const uInt get_ownerID() const {return owner;}
 
             bool empty(){return neighbors.empty();}
-            std::size_t size(){return neighbors.size();}
+            std::size_t size(){return particle_size;}
             iterator begin(){return neighbors.begin();}
-            iterator end(){return neighbors.end();}
+            iterator end(){return end_of_list;}
 
         private:
+
             const uInt owner;
+            std::size_t particle_size;
+            iterator end_of_list;
             std::vector<uInt> neighbors;
     };
     using NeighborListSptr = std::shared_ptr<NeighborList>;
@@ -43,6 +46,7 @@ namespace vicsek
         double R = particle->get_R();
 
         std::size_t index = 0;
+        iterator the_end = neighbors.begin();
         for(auto iter = particle_manager->begin();
                 iter != particle_manager->end(); ++iter)
         {// periodic boundary
@@ -50,8 +54,11 @@ namespace vicsek
             {
                 neighbors[index] = (*iter)->get_ID();
                 ++index;
+                ++the_end;
             }
         }
+        particle_size = index;
+        end_of_list = the_end;
     }
 
     void NeighborList::renew(const RegionSptr& region,
@@ -60,8 +67,10 @@ namespace vicsek
         Vector position = particle_manager->find_ID(owner)->get_position();
         double R = particle_manager->find_ID(owner)->get_R();
 
-        std::size_t index = 0;
         neighbors.clear();
+
+        std::size_t index = 0;
+        iterator the_end = neighbors.begin();
         for(auto iter = particle_manager->begin();
                 iter != particle_manager->end(); ++iter)
         {
@@ -69,8 +78,11 @@ namespace vicsek
             {
                 neighbors[index] = (*iter)->get_ID();
                 ++index;
+                ++the_end;
             }
         }
+        particle_size = index;
+        end_of_list = the_end;
         return;
     }
 
