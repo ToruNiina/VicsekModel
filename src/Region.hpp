@@ -30,22 +30,22 @@ namespace vicsek
 
     Vector Region::adjacent(const Vector& pos, const Vector& opp) const
     {
-        return Vector(std::array<double, 2>{
-                        std::min(std::abs(pos[0] - opp[0]),
-                                 std::abs(pos[0] - opp[0] - width)),
-                        std::min(std::abs(pos[1] - opp[1]),
-                                 std::abs(pos[1] - opp[1] - height))
-                     });
+        return Vector(std::array<double, 2>({{
+                        std::min(fabs(pos[0] - opp[0]),
+                                 fabs(pos[0] - opp[0] - width)),
+                        std::min(fabs(pos[1] - opp[1]),
+                                 fabs(pos[1] - opp[1] - height))
+                     }}));
     }
 
     double Region::min_dist(const Vector& pos, const Vector& opp) const
     {
-        return length(Vector(std::array<double, 2>{
-                        std::min(std::abs(pos[0] - opp[0]),
-                                 std::abs(pos[0] - opp[0] - width)),
-                        std::min(std::abs(pos[1] - opp[1]),
-                                 std::abs(pos[1] - opp[1] - height))
-                        }));
+        return length(Vector(std::array<double, 2>({{
+                        std::min(fabs(pos[0] - opp[0]),
+                                 fabs(pos[0] - opp[0] - width)),
+                        std::min(fabs(pos[1] - opp[1]),
+                                 fabs(pos[1] - opp[1] - height))
+                        }})));
     }
 }
 #endif

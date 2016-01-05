@@ -21,10 +21,9 @@ namespace vicsek
                             const double v0,
                             const double R,
                             const double noise,
-                            const RandomNumberGeneratorSptr& rng);
+                            RandomNumberGeneratorSptr& rng);
 
             ParticleSptr find_ID(const uInt id);
-            const std::vector<ParticleSptr>& get_list(){return particle_list;}
 
             bool empty(){return particle_list.empty();}
             std::size_t size(){return particle_list.size();}
@@ -40,18 +39,18 @@ namespace vicsek
                                      const double v0,
                                      const double R,
                                      const double noise,
-                                     const RandomNumberGeneratorSptr& rng)
+                                     RandomNumberGeneratorSptr& rng)
     {
         double width = reg->right - reg->left;
         double height = reg->upper - reg->lower;
         for(auto iter = particle_list.begin(); iter != particle_list.end();
                 ++iter)
         {
-            double theta = rng->get_uniform_dist();
-            Vector pos = std::array<double, 2>{
+            double theta = 2e0 * M_PI * rng->get_uniform_dist() - M_PI;
+            Vector pos = std::array<double, 2>({{
                 width * rng->get_uniform_dist(),
                 height * rng->get_uniform_dist(),
-            };
+            }});
             *iter = ParticleSptr(new Particle(pos, v0, theta, R, noise));
         }
     }

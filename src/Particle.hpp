@@ -52,7 +52,7 @@ namespace vicsek
             theta -= 2e0 * M_PI;
 
         position +=
-            v_0 * Vector(std::array<double, 2>{cos(theta), sin(theta)});
+            v_0 * Vector(std::array<double, 2>({{cos(theta), sin(theta)}}));
         return;
     }
 
