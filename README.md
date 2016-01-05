@@ -1,0 +1,4 @@
+vicsek
+====
+
+vicsek model simulator
