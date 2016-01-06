@@ -45,20 +45,18 @@ namespace vicsek
         Vector position = particle->get_position();
         double R = particle->get_R();
 
-        std::size_t index = 0;
-        iterator the_end = neighbors.begin();
+        particle_size = 0;
+        end_of_list = neighbors.begin();
         for(auto iter = particle_manager->begin();
                 iter != particle_manager->end(); ++iter)
         {// periodic boundary
             if(region->min_dist(position, (*iter)->get_position()) < R)
             {
-                neighbors[index] = (*iter)->get_ID();
-                ++index;
-                ++the_end;
+                neighbors[particle_size] = (*iter)->get_ID();
+                ++particle_size;
+                ++end_of_list;
             }
         }
-        particle_size = index;
-        end_of_list = the_end;
     }
 
     void NeighborList::renew(const RegionSptr& region,
@@ -69,20 +67,18 @@ namespace vicsek
 
         neighbors.clear();
 
-        std::size_t index = 0;
-        iterator the_end = neighbors.begin();
+        particle_size = 0;
+        end_of_list = neighbors.begin();
         for(auto iter = particle_manager->begin();
                 iter != particle_manager->end(); ++iter)
         {
             if(region->min_dist(position, (*iter)->get_position()) < R)
             {
-                neighbors[index] = (*iter)->get_ID();
-                ++index;
-                ++the_end;
+                neighbors[particle_size] = (*iter)->get_ID();
+                ++particle_size;
+                ++end_of_list;
             }
         }
-        particle_size = index;
-        end_of_list = the_end;
         return;
     }
 
