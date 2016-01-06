@@ -1,3 +1,5 @@
+set term gif animate optimize
+set out 'vicsek.gif'
 set xrange[-10:110]
 set yrange[-10:110]
 set key off
