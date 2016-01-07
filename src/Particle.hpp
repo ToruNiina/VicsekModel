@@ -18,6 +18,7 @@ namespace vicsek
 
             void renew_position(const double mean_angle,
                                 const double rnd,
+                                const double dt,
                                 const RegionSptr& region);
             std::string dump();
 

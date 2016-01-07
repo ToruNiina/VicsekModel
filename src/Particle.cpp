@@ -17,6 +17,7 @@ namespace vicsek
 
     void Particle::renew_position(const double mean_angle,
                                   const double rnd,
+                                  const double dt,
                                   const RegionSptr& region)
     {
         theta = mean_angle + eta * rnd;
@@ -26,8 +27,8 @@ namespace vicsek
         while(theta >= M_PI)
             theta -= 2e0 * M_PI;
 
-        position +=
-            v_0 * Vector(std::array<double, 2>({{cos(theta), sin(theta)}}));
+        position += v_0 * dt *
+            Vector(std::array<double, 2>({{cos(theta), sin(theta)}}));
 
         if(region->out_of_range(position))
             position = region->put_in_range(position);

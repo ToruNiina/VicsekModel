@@ -13,6 +13,8 @@ namespace vicsek
             TimeStepper(){}
             ~TimeStepper(){}
 
+            void set_dt(const double delta_t){dt = delta_t;}
+
             void move_particle(const RegionSptr& region,
                     const ParticleManagerSptr& particle_manager,
                     const NeighborListHandlerSptr& neighbor_list_handler,
@@ -21,6 +23,9 @@ namespace vicsek
             void renew_neighborlist(const RegionSptr& region,
                     const ParticleManagerSptr& particle_manager,
                     const NeighborListHandlerSptr& neighbor_list_handler);
+
+        private:
+            double dt = 0.1;
     };
     using TimeStepperSptr = std::shared_ptr<TimeStepper>;
 }

@@ -33,7 +33,7 @@ namespace vicsek
                 iter !=particle_manager->end(); ++iter)
         {
             double rand = rng->get_uniform_dist();
-            (*iter)->renew_position(*mean_theta_iter, rand, region);
+            (*iter)->renew_position(*mean_theta_iter, rand, dt, region);
             ++mean_theta_iter;
         }
  
