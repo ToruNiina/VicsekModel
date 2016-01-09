@@ -1,9 +1,6 @@
 #ifndef VICSEK_TIME_STEPPER
 #define VICSEK_TIME_STEPPER
-#include "RandomNumberGenerator.hpp"
 #include "NeighborListHandler.hpp"
-#include "ParticleManager.hpp"
-#include "Region.hpp"
 
 namespace vicsek
 {

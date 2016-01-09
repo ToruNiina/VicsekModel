@@ -1,6 +1,5 @@
 #ifndef VICSEK_PARTICLE
 #define VICSEK_PARTICLE
-#include "Defs.hpp"
 #include "Region.hpp"
 
 namespace vicsek

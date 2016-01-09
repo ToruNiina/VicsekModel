@@ -2,7 +2,6 @@
 #define VICSEK_PARTICLE_MANAGER
 #include "RandomNumberGenerator.hpp"
 #include "Particle.hpp"
-#include "Region.hpp"
 #include <vector>
 
 namespace vicsek

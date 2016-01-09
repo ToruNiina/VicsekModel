@@ -1,8 +1,6 @@
 #ifndef VICSEK_NEIGHBOR_LIST
 #define VICSEK_NEIGHBOR_LIST
-#include "Defs.hpp"
 #include "ParticleManager.hpp"
-#include "Region.hpp"
 #include <vector>
 
 namespace vicsek

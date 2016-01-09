@@ -1,11 +1,7 @@
 #ifndef VICSEK_SYSTEM
 #define VICSEK_SYSTEM
-#include "RandomNumberGenerator.hpp"
-#include "NeighborListHandler.hpp"
-#include "ParticleManager.hpp"
-#include "ParticleObserver.hpp"
 #include "TimeStepper.hpp"
-#include "Region.hpp"
+#include "ParticleObserver.hpp"
 
 namespace vicsek
 {
@@ -38,8 +34,8 @@ namespace vicsek
 
         private:
 
-            int seed = 100;
-            uInt maxstep = 1000;
+            int seed = 123;
+            uInt maxstep = 100;
             uInt nlist_renew_step = 1;
             uInt observe_step = 1;
             uInt particle_number = 1000;
@@ -47,7 +43,7 @@ namespace vicsek
             double box_height = 5e1;
             double particle_velocity = 1e0;
             double cutoff_distance = 2.5;
-            double noise_intensity = M_PI;
+            double noise_intensity = 1e-2 * M_PI;
             std::string output_filename = std::string("vicsek.dat");
             RegionSptr region;
             TimeStepperSptr time_stepper;

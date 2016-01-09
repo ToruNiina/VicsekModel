@@ -1,7 +1,6 @@
 #ifndef VICSEK_REGION
 #define VICSEK_REGION
 #include "Defs.hpp"
-#include "LinearAlgebra.hpp"
 
 namespace vicsek
 {

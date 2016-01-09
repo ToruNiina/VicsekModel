@@ -8,8 +8,8 @@ namespace vicsek
                                      const double noise,
                                      RandomNumberGeneratorSptr& rng)
     {
-        double width = reg->right - reg->left;
-        double height = reg->upper - reg->lower;
+        const double width = reg->width;
+        const double height = reg->height;
         for(auto iter = particle_list.begin(); iter != particle_list.end();
                 ++iter)
         {
