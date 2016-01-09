@@ -20,7 +20,8 @@ namespace vicsek
                                   const double dt,
                                   const RegionSptr& region)
     {
-        theta = mean_angle + eta * rnd;
+        assert(0e0 <= rnd && rnd <= 1e0);
+        theta = mean_angle + eta * (rnd - 0.5);
 
         while(theta < -M_PI)
             theta += 2e0 * M_PI;
