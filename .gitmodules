@@ -1,0 +1,3 @@
+[submodule "linear_algebra"]
+	path = linear_algebra
+	url = git@github.com:ToruNiina/AX.git

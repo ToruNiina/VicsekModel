@@ -6,7 +6,7 @@
 
 namespace vicsek
 {
-    using Vector = RealVector<2>;
+    using Vector = ax::RealVector<2>;
     using uInt = unsigned int;
 }
 
