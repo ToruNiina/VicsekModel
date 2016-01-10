@@ -23,6 +23,7 @@ namespace vicsek
                 ++end_of_list;
             }
         }
+//         cend_of_list = end_of_list;
     }
 
     void NeighborList::renew(const RegionSptr& region,
@@ -45,6 +46,7 @@ namespace vicsek
                 ++end_of_list;
             }
         }
+//         cend_of_list = end_of_list;
         return;
     }
 }

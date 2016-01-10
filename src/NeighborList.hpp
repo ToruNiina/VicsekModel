@@ -9,6 +9,7 @@ namespace vicsek
     {
         public:
             using iterator = std::vector<uInt>::iterator;
+            using const_iterator = std::vector<uInt>::const_iterator;
 
         public:
             NeighborList(const ParticleSptr& particle,
@@ -20,10 +21,13 @@ namespace vicsek
 
             const uInt get_ownerID() const {return owner;}
 
-            bool empty(){return neighbors.empty();}
-            std::size_t size(){return particle_size;}
+            bool empty() const {return neighbors.empty();}
+            std::size_t size() const {return particle_size;}
             iterator begin(){return neighbors.begin();}
             iterator end(){return end_of_list;}
+            const_iterator cbegin() const {return neighbors.cbegin();}
+            const_iterator cend() const
+            {return static_cast<const_iterator>(end_of_list);}
 
         private:
 
