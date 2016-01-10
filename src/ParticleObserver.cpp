@@ -3,8 +3,8 @@ namespace vicsek
 {
     void ParticleObserver::write(const ParticleManagerSptr& particle_manager)
     {
-        for(auto iter = particle_manager->begin();
-                iter != particle_manager->end(); ++iter)
+        for(auto iter = particle_manager->cbegin();
+                iter != particle_manager->cend(); ++iter)
         {
             const Vector pos = (*iter)->get_position();
             const double theta = (*iter)->get_theta();

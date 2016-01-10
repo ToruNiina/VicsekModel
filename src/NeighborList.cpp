@@ -13,8 +13,8 @@ namespace vicsek
 
         particle_size = 0;
         end_of_list = neighbors.begin();
-        for(auto iter = particle_manager->begin();
-                iter != particle_manager->end(); ++iter)
+        for(auto iter = particle_manager->cbegin();
+                iter != particle_manager->cend(); ++iter)
         {// periodic boundary
             if(region->min_dist(position, (*iter)->get_position()) < R)
             {
@@ -36,8 +36,8 @@ namespace vicsek
 
         particle_size = 0;
         end_of_list = neighbors.begin();
-        for(auto iter = particle_manager->begin();
-                iter != particle_manager->end(); ++iter)
+        for(auto iter = particle_manager->cbegin();
+                iter != particle_manager->cend(); ++iter)
         {
             if(region->min_dist(position, (*iter)->get_position()) < R)
             {

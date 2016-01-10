@@ -29,8 +29,8 @@ namespace vicsek
             std::size_t size() const {return particle_list.size();}
             iterator begin(){return particle_list.begin();}
             iterator end(){return particle_list.end();}
-            const_iterator begin() const {return particle_list.cbegin();}
-            const_iterator end() const {return particle_list.cend();}
+            const_iterator cbegin() const {return particle_list.cbegin();}
+            const_iterator cend() const {return particle_list.cend();}
 
         private:
             std::vector<ParticleSptr> particle_list;
