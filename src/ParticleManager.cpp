@@ -13,7 +13,7 @@ namespace vicsek
         for(auto iter = particle_list.begin(); iter != particle_list.end();
                 ++iter)
         {
-            double theta = 2e0 * M_PI * rng->get_uniform_dist() - M_PI;
+            double theta = (2e0 * rng->get_uniform_dist() - 1e0) * M_PI;
             Vector pos = std::array<double, 2>({{
                 width * rng->get_uniform_dist(),
                 height * rng->get_uniform_dist(),
