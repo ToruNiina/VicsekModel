@@ -22,6 +22,26 @@ namespace vicsek
                         }})));
     }
 
+    std::array<Vector, 8> Region::periodic_1st(const Vector& pos,
+                                               const Vector& opp) const
+    {/* 8 1 2 *
+      * 7 0 3 *
+      * 6 5 4 */
+        std::array<Vector, 8> retval;
+        for(int i(1); i < 9; ++i)
+        {
+            const double Xpos
+                = ((2 <= i && i <= 4) ? opp[0] + width :
+                        (6 <= i && i <= 8) ? opp[0] - width : opp[0]);
+            const double Ypos
+                = ((i == 1 || i == 2 || i == 8) ? opp[1] + height :
+                        (4 <= i && i <= 6) ? opp[1] - height : opp[1]);
+            retval.at(i) = (Vector(std::array<double, 2>({{Xpos, Ypos}})));
+        }
+
+        return retval;
+    }
+
     bool Region::out_of_range(const Vector& pos)
     {
         return !( (left <= pos[0] && pos[0] < right) &&
