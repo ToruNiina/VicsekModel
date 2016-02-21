@@ -1,4 +1,5 @@
 *.dat
-build/
-bin/
+build/*
+bin/*
+!.gitkeep
 .DS_Store
