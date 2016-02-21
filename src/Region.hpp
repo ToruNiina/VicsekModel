@@ -17,8 +17,7 @@ namespace vicsek
 
             Vector adjacent(const Vector& pos, const Vector& opp) const;
             double min_dist(const Vector& pos, const Vector& opp) const;
-            std::array<Vector,8> periodic_1st(const Vector& pos,
-                                              const Vector& opp) const;
+            std::array<Vector,8> periodic_1st(const Vector& opp) const;
 
             bool out_of_range(const Vector& pos);
             Vector put_in_range(const Vector& pos);

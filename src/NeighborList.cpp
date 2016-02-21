@@ -39,11 +39,20 @@ namespace vicsek
         for(auto iter = particle_manager->cbegin();
                 iter != particle_manager->cend(); ++iter)
         {
-            if(region->min_dist(position, (*iter)->get_position()) < R)
+            const std::array<Vector, 8>
+                periodic_copies(region->periodic_1st((*iter)->get_position()));
+
+            for(auto periodic_iter = periodic_copies.cbegin();
+                    periodic_iter != periodic_copies.cend(); ++periodic_iter)
             {
-                neighbors[particle_size] = (*iter)->get_ID();
-                ++particle_size;
-                ++end_of_list;
+                if(length(position - *periodic_iter) < R)
+                {
+                    // if the particle's periodic boundary copy is near,
+                    // add the particle into neighbors several times.
+                    neighbors[particle_size] = (*iter)->get_ID();
+                    ++particle_size;
+                    ++end_of_list;
+                }
             }
         }
 //         cend_of_list = end_of_list;

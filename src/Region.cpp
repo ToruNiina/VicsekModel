@@ -22,8 +22,7 @@ namespace vicsek
                         }})));
     }
 
-    std::array<Vector, 8> Region::periodic_1st(const Vector& pos,
-                                               const Vector& opp) const
+    std::array<Vector, 8> Region::periodic_1st(const Vector& opp) const
     {/* 8 1 2 *
       * 7 0 3 *
       * 6 5 4 */
@@ -36,7 +35,7 @@ namespace vicsek
             const double Ypos
                 = ((i == 1 || i == 2 || i == 8) ? opp[1] + height :
                         (4 <= i && i <= 6) ? opp[1] - height : opp[1]);
-            retval.at(i) = (Vector(std::array<double, 2>({{Xpos, Ypos}})));
+            retval.at(i-1) = (Vector(std::array<double, 2>({{Xpos, Ypos}})));
         }
 
         return retval;
@@ -44,7 +43,7 @@ namespace vicsek
 
     bool Region::out_of_range(const Vector& pos)
     {
-        return !( (left <= pos[0] && pos[0] < right) &&
+        return !(( left <= pos[0] && pos[0] < right) &&
                  (lower <= pos[1] && pos[1] < upper));
     }
 
@@ -64,7 +63,13 @@ namespace vicsek
 
         Vector retval = Vector(std::array<double, 2>({{pos_x, pos_y}}));
         if(out_of_range(retval))
-            throw std::logic_error("Region:internal error");
+            throw std::logic_error("Region:internal error. x = "
+                    + std::to_string(pos_x) + ", y = "
+                    + std::to_string(pos_y) + " and region is "
+                    + std::to_string(left) + " < x < "
+                    + std::to_string(right) + ", "
+                    + std::to_string(lower) + " < y < "
+                    + std::to_string(upper));
 
         return retval;
     }
