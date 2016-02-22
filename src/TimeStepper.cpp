@@ -2,10 +2,12 @@
 
 namespace vicsek
 {
-    void TimeStepper::move_particle(const RegionSptr& region,
-            const ParticleManagerSptr& particle_manager,
-            const NeighborListHandlerSptr& neighbor_list_handler,
-            const RandomNumberGeneratorSptr& rng)
+    void TimeStepper::move_particle(
+                const RegionSptr& region,
+                const ParticleManagerSptr& particle_manager,
+                const NeighborListHandlerSptr& neighbor_list_handler,
+                const RandomNumberGeneratorSptr& rng
+            )
     {
         std::vector<double> mean_theta_list(particle_manager->size());
 
@@ -16,8 +18,8 @@ namespace vicsek
             NeighborListSptr nlist =
                 neighbor_list_handler->find_ID((*iter)->get_ID());
 
-            int neighbor_num = 0;
-            double sum_theta(0e0);
+            unsigned int neighbor_num = 1;
+            double sum_theta((*iter)->get_theta());
             for(auto niter = nlist->begin(); niter != nlist->end(); ++niter)
             {
                 sum_theta += particle_manager->find_ID(*niter)->get_theta();
@@ -40,9 +42,11 @@ namespace vicsek
         return;
     }
 
-    void TimeStepper::renew_neighborlist(const RegionSptr& region,
-            const ParticleManagerSptr& particle_manager,
-            const NeighborListHandlerSptr& neighbor_list_handler)
+    void TimeStepper::renew_neighborlist(
+                const RegionSptr& region,
+                const ParticleManagerSptr& particle_manager,
+                const NeighborListHandlerSptr& neighbor_list_handler
+            )
     {
         for(auto iter = neighbor_list_handler->begin();
                 iter != neighbor_list_handler->end(); ++iter)

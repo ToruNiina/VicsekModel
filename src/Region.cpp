@@ -22,11 +22,15 @@ namespace vicsek
                         }})));
     }
 
-    std::array<Vector, 8> Region::periodic_1st(const Vector& opp) const
-    {/* 8 1 2 *
-      * 7 0 3 *
-      * 6 5 4 */
-        std::array<Vector, 8> retval;
+    std::array<Vector, 9> Region::periodic_1st(const Vector& opp) const
+    {
+        /* 8 1 2 *
+         * 7 0 3 *
+         * 6 5 4 */
+        std::array<Vector, 9> retval;
+
+        retval.at(0) = opp; // itself
+
         for(int i(1); i < 9; ++i)
         {
             const double Xpos
@@ -35,7 +39,7 @@ namespace vicsek
             const double Ypos
                 = ((i == 1 || i == 2 || i == 8) ? opp[1] + height :
                         (4 <= i && i <= 6) ? opp[1] - height : opp[1]);
-            retval.at(i-1) = (Vector(std::array<double, 2>({{Xpos, Ypos}})));
+            retval.at(i) = (Vector(std::array<double, 2>({{Xpos, Ypos}})));
         }
 
         return retval;

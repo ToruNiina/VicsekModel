@@ -29,8 +29,8 @@ namespace vicsek
     void NeighborList::renew(const RegionSptr& region,
                              const ParticleManagerSptr& particle_manager)
     {
-        Vector position = particle_manager->find_ID(owner)->get_position();
-        double R = particle_manager->find_ID(owner)->get_R();
+        const Vector position = particle_manager->find_ID(owner)->get_position();
+        const double R = particle_manager->find_ID(owner)->get_R();
 
         neighbors.clear();
 
@@ -39,7 +39,7 @@ namespace vicsek
         for(auto iter = particle_manager->cbegin();
                 iter != particle_manager->cend(); ++iter)
         {
-            const std::array<Vector, 8>
+            const std::array<Vector, 9>
                 periodic_copies(region->periodic_1st((*iter)->get_position()));
 
             for(auto periodic_iter = periodic_copies.cbegin();
